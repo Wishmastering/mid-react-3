@@ -11,7 +11,9 @@ Requerimientos ->
 
 - Necesita mostrar un input para buscar la pelicula y un boton para buscar.
 
-✅ Lista las peliculas encontradas y muestra el titulo, a;o y poster
+- Lista las peliculas encontradas y muestra el titulo, a;o y poster
+
+- controlar inputs
 
 ✅ map de lo encontrado
 -- fetch (progressing)

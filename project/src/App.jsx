@@ -3,7 +3,14 @@ import results from "./mocks/with-response.json";
 
 export default function App() {
   const movies = results.Search;
-  const hasMovies = movies?.length > 0;
+
+  const mappedMovies = movies?.map((movie) => ({
+    poster: movie.Poster,
+    title: movie.Title,
+    type: movie.Type,
+    year: movie.Year,
+    id: movie.imdbID,
+  }));
 
   return (
     <main>
@@ -15,41 +22,34 @@ export default function App() {
         </form>
       </div>
       {/* {hasMovies ? <Movies movies={movies} /> : <NoResults />} */}
-      {hasMovies ? (
-        <ul>
-          {movies.map((item) => (
-            <div key={item.imdbID}>
-              <div>
-                <h3>{item.Title} </h3>
-                <h5> {item.Year}</h5>
-              </div>
-              <img src={item.Poster} alt={item.Title} />
-            </div>
-          ))}
-        </ul>
-      ) : (
-        <h1>No Results</h1>
-      )}
+      <Movies movies={mappedMovies} />}
     </main>
   );
 }
 
-// function Movies({ movies }) {
-//   return (
-//     <ul>
-//       {movies.map((movie) => (
-//         <li>
-//           <h3>{movie.}</h3>
-//         </li>
-//       ))}
-//     </ul>
-//   );
-// }
+function Movies({ movies }) {
+  const hasMovies = movies?.length > 0;
+  return <>{hasMovies ? <ListOfMovies movies={movies} /> : <NoResults />}</>;
+}
 
-// function NoResults() {
-//   return (
-//     <div>
-//       <h1>Couldnt Find Any Movie With That Title</h1>
-//     </div>
-//   );
-// }
+function ListOfMovies({ movies }) {
+  return (
+    <ul>
+      {movies.map((item) => (
+        <li key={item.id}>
+          <h3>{item.title} </h3>
+          <h5> {item.year}</h5>
+          <img src={item.poster} alt={item.title} />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function NoResults() {
+  return (
+    <div>
+      <h1>Couldnt Find Any Movie With That Title</h1>
+    </div>
+  );
+}
