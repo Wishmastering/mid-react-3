@@ -15,14 +15,23 @@ Requerimientos ->
 
 - controlar inputs
 
-✅ map de lo encontrado
--- fetch (progressing)
+- Manejar errores para ->
 
-✅ Haz que las peliculas se muestren en un grid responsive.
+a. Si el string es vacio
+b. Si solo hay numeros
+c. Si es menor a 3 caracteres
+
+- map de lo encontrado
+
+- Haz que las peliculas se muestren en un grid responsive.
+
+-- fetch (progressing)
 
 Primera iteracion:
 
-✅ Evitar que se haga la misma busqueda dos veces seguidas
+- Evitar que se haga la misma busqueda dos veces seguidas
+
+- crear un sort por orden alfabetico
 
 ✅ Haz que la busqueda se haga automaticamente al escribir
 

@@ -1,29 +1,46 @@
+import { useEffect, useState, useRef } from "react";
 import "./App.css";
-import results from "./mocks/with-response.json";
+import useMovies from "./hooks/useMovies";
+import useSearch from "./hooks/useSearch";
 
 export default function App() {
-  const movies = results.Search;
+  const [sort, setSort] = useState(false);
+  const { input, setInput, error } = useSearch();
+  const { movies, getMovies, loading } = useMovies({ input, sort });
 
-  const mappedMovies = movies?.map((movie) => ({
-    poster: movie.Poster,
-    title: movie.Title,
-    type: movie.Type,
-    year: movie.Year,
-    id: movie.imdbID,
-  }));
+  const handleSort = () => {
+    setSort(!sort);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // alert(input);
+    getMovies();
+  };
+
+  const handleChange = (e) => {
+    const newInput = e.target.value;
+    if (newInput.startsWith(" ")) return;
+    setInput(newInput);
+    // getMovies();
+  };
 
   return (
-    <main>
+    <div className="page">
       <h1>Movie Finder</h1>
-      <div className="search">
-        <form action="submit">
-          <input type="text" />
-          <button>Search Movie</button>
+      <header className="search">
+        <form action="submit" onSubmit={handleSubmit}>
+          <input type="text" onChange={handleChange} value={input} />
+          <input type="checkbox" onClick={handleSort} checked={sort} />
+          <button type="submit">Search Movie</button>
+          {error && <p style={{ color: "red" }}> {error}</p>}
         </form>
-      </div>
+      </header>
       {/* {hasMovies ? <Movies movies={movies} /> : <NoResults />} */}
-      <Movies movies={mappedMovies} />}
-    </main>
+      <main className="container">
+        {loading ? <p>Loading your results...</p> : <Movies movies={movies} />}
+      </main>
+    </div>
   );
 }
 
@@ -34,8 +51,8 @@ function Movies({ movies }) {
 
 function ListOfMovies({ movies }) {
   return (
-    <ul>
-      {movies.map((item) => (
+    <ul className="movies">
+      {movies?.map((item) => (
         <li key={item.id}>
           <h3>{item.title} </h3>
           <h5> {item.year}</h5>
