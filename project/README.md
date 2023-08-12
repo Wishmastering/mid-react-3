@@ -33,6 +33,8 @@ Primera iteracion:
 
 - crear un sort por orden alfabetico
 
+- Haz que el sort solo se ejecute cuando cambien las peliculas a mostrarse (dependencia)
+
 ✅ Haz que la busqueda se haga automaticamente al escribir
 
 ✅ Evita que se haga la busqueda continuamente al escribir (debounce)

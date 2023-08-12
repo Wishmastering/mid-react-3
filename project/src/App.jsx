@@ -15,14 +15,14 @@ export default function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // alert(input);
-    getMovies();
+    getMovies({ input });
   };
 
   const handleChange = (e) => {
     const newInput = e.target.value;
     if (newInput.startsWith(" ")) return;
     setInput(newInput);
-    // getMovies();
+    getMovies({ input: newInput });
   };
 
   return (
