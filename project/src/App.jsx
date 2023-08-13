@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import "./App.css";
 import useMovies from "./hooks/useMovies";
 import useSearch from "./hooks/useSearch";
@@ -10,9 +10,13 @@ export default function App() {
   const { input, setInput, error } = useSearch();
   const { movies, getMovies, loading } = useMovies({ input, sort });
 
-  const debouncedMovies = debounce((input) => {
-    console.log(input);
-  }, 500);
+  const debouncedMovies = useCallback(
+    debounce((input) => {
+      console.log(input);
+      getMovies({ input });
+    }, 500),
+    [getMovies]
+  );
 
   const handleSort = () => {
     setSort(!sort);
@@ -28,7 +32,7 @@ export default function App() {
     const newInput = e.target.value;
     if (newInput.startsWith(" ")) return;
     setInput(newInput);
-    debouncedMovies();
+    debouncedMovies(newInput);
   };
 
   return (

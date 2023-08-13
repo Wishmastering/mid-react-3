@@ -2,8 +2,10 @@ Crea una aplicacion para buscar peliculas
 
 APIs a usar:
 
+✅
+
 - https://www.omdbapi.com/
-- API_KEY: 4287ad07 // e1f20ea6 <- Mi llave
+- API_KEY: e1f20ea6 <- Mi llave
 
 -- http://www.omdbapi.com/?apikey=e1f20ea6&s=star
 
@@ -35,8 +37,8 @@ Primera iteracion:
 
 - Haz que el sort solo se ejecute cuando cambien las peliculas a mostrarse (dependencia)
 
-✅ Haz que la busqueda se haga automaticamente al escribir
+- Haz que la busqueda se haga automaticamente al escribir
 
-✅ Evita que se haga la busqueda continuamente al escribir (debounce)
+- Evita que se haga la busqueda continuamente al escribir (debounce)
 
 <!-- Bairesdev -->
