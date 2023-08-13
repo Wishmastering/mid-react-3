@@ -3,10 +3,16 @@ import "./App.css";
 import useMovies from "./hooks/useMovies";
 import useSearch from "./hooks/useSearch";
 
+import debounce from "just-debounce-it";
+
 export default function App() {
   const [sort, setSort] = useState(false);
   const { input, setInput, error } = useSearch();
   const { movies, getMovies, loading } = useMovies({ input, sort });
+
+  const debouncedMovies = debounce((input) => {
+    console.log(input);
+  }, 500);
 
   const handleSort = () => {
     setSort(!sort);
@@ -22,7 +28,7 @@ export default function App() {
     const newInput = e.target.value;
     if (newInput.startsWith(" ")) return;
     setInput(newInput);
-    getMovies({ input: newInput });
+    debouncedMovies();
   };
 
   return (
